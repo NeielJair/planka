@@ -38,7 +38,7 @@ const LEGACY_COLORS = {
   'egg-yellow': '#f7d036',
   'coral-green': '#2b6a6c',
   'light-cocoa': '#87564a',
-};
+}; // TODO delete
 
 const Label = React.memo(({ name, color, size, isDisabled, onClick }) => {
   const contentNode = (

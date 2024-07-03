@@ -3,9 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import LabelColors from '../../constants/LabelColors';
-
 import styles from './Label.module.scss';
+import globalStyles from '../../styles.module.scss';
 
 const SIZES = {
   TINY: 'tiny',
@@ -46,13 +45,14 @@ const Label = React.memo(({ name, color, size, isDisabled, onClick }) => {
     <div
       title={name}
       style={{
-        '--label-color': color.includes('#') ? color : LEGACY_COLORS[color],
+        '--background': color.includes('#') ? color : LEGACY_COLORS[color],
       }}
       className={classNames(
         styles.wrapper,
         !name && styles.wrapperNameless,
         styles[`wrapper${upperFirst(size)}`],
         onClick && styles.wrapperHoverable,
+        globalStyles.backgroundVariant,
       )}
     >
       {name || '\u00A0'}
@@ -70,7 +70,7 @@ const Label = React.memo(({ name, color, size, isDisabled, onClick }) => {
 
 Label.propTypes = {
   name: PropTypes.string,
-  color: PropTypes.oneOf(LabelColors).isRequired,
+  color: PropTypes.string.isRequired,
   size: PropTypes.oneOf(Object.values(SIZES)),
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func,

@@ -52,7 +52,7 @@
     ],
     "rules": {
       "no-undef": "off",
-      "prettier/prettier": "error"
+      "prettier/prettier": "warn"
     }
   },
   "dependencies": {

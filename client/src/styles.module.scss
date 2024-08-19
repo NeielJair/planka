@@ -144,6 +144,10 @@
 :global(#app) {
   /* Backgrounds */
 
+  .backgroundVariant {
+    background: var(--background) !important;
+  }
+
   .backgroundBerryRed {
     background: #e04556 !important;
   }

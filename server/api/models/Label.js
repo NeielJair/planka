@@ -5,36 +5,10 @@
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 
-const COLORS = [
-  'berry-red',
-  'pumpkin-orange',
-  'lagoon-blue',
-  'pink-tulip',
-  'light-mud',
-  'orange-peel',
-  'bright-moss',
-  'antique-blue',
-  'dark-granite',
-  'lagune-blue',
-  'sunny-grass',
-  'morning-sky',
-  'light-orange',
-  'midnight-blue',
-  'tank-green',
-  'gun-metal',
-  'wet-moss',
-  'red-burgundy',
-  'light-concrete',
-  'apricot-red',
-  'desert-sand',
-  'navy-blue',
-  'egg-yellow',
-  'coral-green',
-  'light-cocoa',
-];
+const COLOR_REGEX = /^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
 
 module.exports = {
-  COLORS,
+  COLOR_REGEX,
 
   attributes: {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
@@ -52,7 +26,7 @@ module.exports = {
     },
     color: {
       type: 'string',
-      isIn: COLORS,
+      regex: COLOR_REGEX,
       required: true,
     },
 

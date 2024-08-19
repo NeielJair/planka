@@ -1,10 +1,7 @@
 import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-import LabelColors from '../../constants/LabelColors';
 
 import styles from './Label.module.scss';
 import globalStyles from '../../styles.module.scss';
@@ -19,12 +16,15 @@ const Label = React.memo(({ name, color, size, isDisabled, onClick }) => {
   const contentNode = (
     <div
       title={name}
+      style={{
+        '--background': color,
+      }}
       className={classNames(
         styles.wrapper,
         !name && styles.wrapperNameless,
         styles[`wrapper${upperFirst(size)}`],
         onClick && styles.wrapperHoverable,
-        globalStyles[`background${upperFirst(camelCase(color))}`],
+        globalStyles.backgroundVariant,
       )}
     >
       {name || '\u00A0'}
@@ -42,7 +42,7 @@ const Label = React.memo(({ name, color, size, isDisabled, onClick }) => {
 
 Label.propTypes = {
   name: PropTypes.string,
-  color: PropTypes.oneOf(LabelColors).isRequired,
+  color: PropTypes.string.isRequired,
   size: PropTypes.oneOf(Object.values(SIZES)),
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func,

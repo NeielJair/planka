@@ -25,7 +25,7 @@ module.exports = {
     },
     color: {
       type: 'string',
-      isIn: Label.COLORS,
+      regex: Label.COLOR_REGEX,
       required: true,
     },
   },

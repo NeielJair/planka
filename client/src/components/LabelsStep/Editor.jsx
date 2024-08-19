@@ -1,5 +1,3 @@
-import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -40,14 +38,32 @@ const Editor = React.memo(({ data, onFieldChange }) => {
             type="button"
             name="color"
             value={color}
+            style={{
+              '--background': color,
+            }}
             className={classNames(
               styles.colorButton,
               color === data.color && styles.colorButtonActive,
-              globalStyles[`background${upperFirst(camelCase(color))}`],
+              globalStyles.backgroundVariant,
             )}
             onClick={onFieldChange}
           />
         ))}
+        <Button
+          type="button"
+          name="color"
+          value="#ff0000"
+          style={{
+            '--background':
+              'linear-gradient(to bottom right, red, orange, yellow, green, blue, indigo, violet)',
+          }}
+          className={classNames(
+            styles.colorButton,
+            data.color === '#ff0000' && styles.colorButtonActive,
+            globalStyles.backgroundVariant,
+          )}
+          onClick={onFieldChange}
+        />
       </div>
     </>
   );

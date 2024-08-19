@@ -1,5 +1,3 @@
-import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
 import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -32,10 +30,13 @@ const Item = React.memo(
                                            jsx-a11y/no-static-element-interactions */}
               <span
                 {...dragHandleProps} // eslint-disable-line react/jsx-props-no-spreading
+                style={{
+                  '--background': color,
+                }}
                 className={classNames(
                   styles.name,
                   isActive && styles.nameActive,
-                  globalStyles[`background${upperFirst(camelCase(color))}`],
+                  globalStyles.backgroundVariant,
                 )}
                 onClick={handleToggleClick}
               >

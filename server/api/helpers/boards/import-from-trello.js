@@ -1,5 +1,39 @@
 const POSITION_GAP = 65535; // TODO: move to config
 
+const TRELLO_COLORS = {
+  "pink_light": "#FFC0CB",
+  "pink": "#FF69B4",
+  "pink_dark": "#C71585",
+  "yellow_light": "#FFFFE0",
+  "yellow": "#FFFF00",
+  "yellow_dark": "#FFD700",
+  "lime_light": "#DFFF00",
+  "lime": "#00FF00",
+  "lime_dark": "#32CD32",
+  "blue_light": "#ADD8E6",
+  "blue": "#0000FF",
+  "blue_dark": "#00008B",
+  "black_light": "#A9A9A9",  // Light gray as a "light" black
+  "black": "#000000",
+  "black_dark": "#0A0A0A",  // A slightly darker black
+  "orange_light": "#FFDAB9",
+  "orange": "#FFA500",
+  "orange_dark": "#FF8C00",
+  "red_light": "#FF7F7F",
+  "red": "#FF0000",
+  "red_dark": "#8B0000",
+  "purple_light": "#E6E6FA",
+  "purple": "#800080",
+  "purple_dark": "#4B0082",
+  "sky_light": "#87CEFA",
+  "sky": "#00BFFF",
+  "sky_dark": "#4682B4",
+  "green_light": "#90EE90",
+  "green": "#008000",
+  "green_dark": "#006400",
+}
+
+
 module.exports = {
   inputs: {
     board: {
@@ -51,8 +85,7 @@ module.exports = {
           action.data.card.id === cardId,
       );
 
-    const getPlankaLabelColor = (trelloLabelColor) =>
-      Label.COLORS.find((color) => color.indexOf(trelloLabelColor) !== -1) || 'desert-sand';
+    const getPlankaLabelColor = (trelloLabelColor) => TRELLO_COLORS[trelloLabelColor] || TRELLO_COLORS['black'];
 
     const importCardLabels = async (plankaCard, trelloCard) => {
       return Promise.all(

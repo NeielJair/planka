@@ -1,18 +1,18 @@
-import pick from 'lodash/pick';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Button } from 'semantic-ui-react';
-import { Input, Popup } from '../../lib/custom-ui';
+import pick from "lodash/pick";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Button } from "semantic-ui-react";
+import { Input, Popup } from "../../lib/custom-ui";
 
-import { useField, useSteps } from '../../hooks';
-import DroppableTypes from '../../constants/DroppableTypes';
-import AddStep from './AddStep';
-import EditStep from './EditStep';
-import Item from './Item';
+import { useField, useSteps } from "../../hooks";
+import DroppableTypes from "../../constants/DroppableTypes";
+import AddStep from "./AddStep";
+import EditStep from "./EditStep";
+import Item from "./Item";
 
-import styles from './LabelsStep.module.scss';
+import styles from "./LabelsStep.module.scss";
 
 const StepTypes = {
   ADD: 'ADD',
@@ -42,8 +42,9 @@ const LabelsStep = React.memo(
       () =>
         items.filter(
           (label) =>
+            (console.log(JSON.stringify(label)),(
             (label.name && label.name.toLowerCase().includes(cleanSearch)) ||
-            label.color.includes(cleanSearch),
+            label.color.includes(cleanSearch)))
         ),
       [items, cleanSearch],
     );

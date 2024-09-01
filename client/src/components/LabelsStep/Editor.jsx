@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { Button } from "semantic-ui-react";
 import { Input } from "../../lib/custom-ui";
 
 import LabelColors from "../../constants/LabelColors";
 
 import styles from "./Editor.module.scss";
-import globalStyles from "../../styles.module.scss";
 import { SketchPicker } from "react-color";
 
 const Editor = React.memo(({ data, onFieldChange }) => {
@@ -39,8 +36,8 @@ const Editor = React.memo(({ data, onFieldChange }) => {
           presetColors={LabelColors}
           color={customColor}
           onChange={(color) => {
-            setCustomColor(color);
-            onFieldChange(undefined, { name: "color", value: color });
+            setCustomColor(color.hex);
+            onFieldChange(undefined, { name: "color", value: color.hex });
           }}
           className={styles.sketchPicker}
         />

@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
-import { Button } from 'semantic-ui-react';
-import { Input } from '../../lib/custom-ui';
+import React, { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { Input } from "../../lib/custom-ui";
 
-import LabelColors from '../../constants/LabelColors';
+import LabelColors from "../../constants/LabelColors";
 
-import styles from './Editor.module.scss';
-import globalStyles from '../../styles.module.scss';
+import styles from "./Editor.module.scss";
+import { SketchPicker } from "react-color";
 
 const Editor = React.memo(({ data, onFieldChange }) => {
   const [t] = useTranslation();
+
+  const [customColor, setCustomColor] = useState("#ff0000");
 
   const nameField = useRef(null);
 
@@ -21,7 +21,7 @@ const Editor = React.memo(({ data, onFieldChange }) => {
 
   return (
     <>
-      <div className={styles.text}>{t('common.title')}</div>
+      <div className={styles.text}>{t("common.title")}</div>
       <Input
         fluid
         ref={nameField}
@@ -30,39 +30,16 @@ const Editor = React.memo(({ data, onFieldChange }) => {
         className={styles.field}
         onChange={onFieldChange}
       />
-      <div className={styles.text}>{t('common.color')}</div>
+      <div className={styles.text}>{t("common.color")}</div>
       <div className={styles.colorButtons}>
-        {LabelColors.map((color) => (
-          <Button
-            key={color}
-            type="button"
-            name="color"
-            value={color}
-            style={{
-              '--background': color,
-            }}
-            className={classNames(
-              styles.colorButton,
-              color === data.color && styles.colorButtonActive,
-              globalStyles.backgroundVariant,
-            )}
-            onClick={onFieldChange}
-          />
-        ))}
-        <Button
-          type="button"
-          name="color"
-          value="#ff0000"
-          style={{
-            '--background':
-              'linear-gradient(to bottom right, red, orange, yellow, green, blue, indigo, violet)',
+        <SketchPicker
+          presetColors={LabelColors}
+          color={customColor}
+          onChange={(color) => {
+            setCustomColor(color.hex);
+            onFieldChange(undefined, { name: "color", value: color.hex });
           }}
-          className={classNames(
-            styles.colorButton,
-            data.color === '#ff0000' && styles.colorButtonActive,
-            globalStyles.backgroundVariant,
-          )}
-          onClick={onFieldChange}
+          className={styles.sketchPicker}
         />
       </div>
     </>
@@ -71,7 +48,7 @@ const Editor = React.memo(({ data, onFieldChange }) => {
 
 Editor.propTypes = {
   data: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  onFieldChange: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired
 };
 
 export default Editor;
